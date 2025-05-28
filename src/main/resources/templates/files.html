@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Архив учебных работ</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Иконки Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            padding-top: 20px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .card-header {
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        .btn-danger {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .table th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .search-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .action-buttons .btn {
+            margin-right: 5px;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4">
+                <i class="fas fa-archive me-2"></i>Архив учебных работ
+            </h1>
+            <p class="lead text-muted">Система учета студенческих проектов и исследований</p>
+        </div>
+    </div>
+
+    <!-- Карточка добавления новой работы -->
+    <div class="card form-section">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="fas fa-plus-circle me-2"></i>Добавить новую работу
+            </h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/files/add}" method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label for="projectName" class="form-label">Название работы</label>
+                    <input type="text" class="form-control" id="projectName" name="projectName">
+                </div>
+                <div class="col-md-6">
+                    <label for="username" class="form-label">Автор</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="col-md-6">
+                    <label for="url" class="form-label">Ссылка на работу</label>
+                    <input type="text" class="form-control" id="url" name="url">
+                </div>
+                <div class="col-md-6">
+                    <label for="faculty" class="form-label">Факультет</label>
+                    <input type="text" class="form-control" id="faculty" name="faculty">
+                </div>
+                <div class="col-md-4">
+                    <label for="studentGroup" class="form-label">Группа</label>
+                    <input type="text" class="form-control" id="studentGroup" name="studentGroup">
+                </div>
+                <div class="col-md-4">
+                    <label for="department" class="form-label">Кафедра</label>
+                    <input type="text" class="form-control" id="department" name="department">
+                </div>
+                <div class="col-md-4">
+                    <label for="projectMasterName" class="form-label">Руководитель</label>
+                    <input type="text" class="form-control" id="projectMasterName" name="projectMasterName">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Карточка поиска -->
+    <div class="card search-box">
+        <div class="card-body p-0">
+            <form th:action="@{/files}" method="get" class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    <label for="searchBy" class="form-label">Поиск по:</label>
+                    <select id="searchBy" name="searchBy" class="form-select">
+                        <option value="projectName">Название работы</option>
+                        <option value="username">Автор</option>
+                        <option value="url">Ссылка</option>
+                        <option value="faculty">Факультет</option>
+                        <option value="studentGroup">Группа</option>
+                        <option value="department">Кафедра</option>
+                        <option value="projectMasterName">Руководитель</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="keyword" class="form-label">Поисковый запрос:</label>
+                    <div class="input-group">
+                        <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Введите текст для поиска...">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search me-1"></i> Найти
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <a th:href="@{/files}" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-sync-alt me-1"></i> Сбросить
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Карточка списка работ -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>Список работ
+            </h5>
+            <span class="badge bg-primary rounded-pill" th:text="${files.size()} + ' работ'"></span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Название работы</th>
+                        <th>Автор</th>
+                        <th>Группа</th>
+                        <th>Факультет</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="file : ${files}">
+                        <td th:text="${file.id}"></td>
+                        <td>
+                            <a th:href="${file.url}" target="_blank" th:text="${file.projectName}" class="text-decoration-none"></a>
+                        </td>
+                        <td th:text="${file.username}"></td>
+                        <td th:text="${file.studentGroup}"></td>
+                        <td th:text="${file.faculty}"></td>
+                        <td class="action-buttons">
+                            <a th:href="@{/files/edit/} + ${file.id}" class="btn btn-sm btn-outline-success" title="Редактировать">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a th:href="@{/files/delete/} + ${file.id}" class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('Вы уверены, что хотите удалить эту запись?')" title="Удалить">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${files.empty}">
+                        <td colspan="6" class="text-center text-muted py-4">
+                            <i class="fas fa-inbox fa-2x mb-2"></i><br>
+                            Нет данных для отображения
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+            <div>
+                Показано <span th:text="${files.size()}"></span> из <span th:text="${files.size()}"></span> записей
+            </div>
+            <div>
+                <a th:href="@{/files/export}" class="text-decoration-none me-2" id="exportBtn">
+                    <i class="fas fa-file-excel me-1"></i> Экспорт
+                </a>
+                <a href="#" class="text-decoration-none" onclick="window.print()">
+                    <i class="fas fa-print me-1"></i> Печать
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('exportBtn').addEventListener('click', function(e) {
+        const originalContent = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Подготовка файла...';
+
+        setTimeout(() => {
+            this.innerHTML = originalContent;
+        }, 2000);
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', function(e) {
+        if (!confirm('Экспортировать все данные в Excel?')) {
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
