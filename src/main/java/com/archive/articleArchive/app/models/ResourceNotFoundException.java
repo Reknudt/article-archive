@@ -1,4 +1,4 @@
-package com.archive.articleArchive.app;
+package com.archive.articleArchive.app.models;
 
 public class ResourceNotFoundException extends RuntimeException{
 

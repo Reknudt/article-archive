@@ -27,4 +27,36 @@ public class Supervisor {
 
     @OneToMany(mappedBy = "supervisor")
     private List<Student> students = new ArrayList<>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
 }

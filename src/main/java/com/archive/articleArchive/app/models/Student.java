@@ -48,4 +48,68 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Publication> publications = new ArrayList<>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setCourse(Integer course) {
+        this.course = course;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public void setSupervisor(Supervisor supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public void setScientificEvents(List<ScientificEvent> scientificEvents) {
+        this.scientificEvents = scientificEvents;
+    }
+
+    public void setPublications(List<Publication> publications) {
+        this.publications = publications;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Integer getCourse() {
+        return course;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public Supervisor getSupervisor() {
+        return supervisor;
+    }
+
+    public List<ScientificEvent> getScientificEvents() {
+        return scientificEvents;
+    }
+
+    public List<Publication> getPublications() {
+        return publications;
+    }
 }

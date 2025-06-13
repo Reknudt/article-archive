@@ -12,6 +12,23 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("CONFERENCE")
 public class Conference extends ScientificEvent {
+
+    public void setConferenceType(ConferenceType conferenceType) {
+        this.conferenceType = conferenceType;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public ConferenceType getConferenceType() {
+        return conferenceType;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
     public enum ConferenceType { ROUND_TABLE, SEMINAR }
     public enum Level { INTERNATIONAL, REPUBLICAN, UNIVERSITY }
     

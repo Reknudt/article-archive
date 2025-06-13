@@ -1,0 +1,51 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Список студентов</title>-->
+<!--</head>-->
+<!--<body>-->
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Редактирование тезисов</h2>
+
+    <form method="POST" action="{{ url_for('publications.edit_thesis', thesis_id=thesis.id) }}">
+        <div class="form-group">
+            <label for="title">Название тезисов</label>
+            <input type="text" class="form-control" id="title" name="title"
+                   value="{{ thesis.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="authors">Авторы</label>
+            <input type="text" class="form-control" id="authors" name="authors"
+                   value="{{ thesis.authors }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="conference">Конференция</label>
+            <input type="text" class="form-control" id="conference" name="conference"
+                   value="{{ thesis.conference }}">
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год публикации</label>
+            <input type="number" class="form-control" id="year" name="year"
+                   value="{{ thesis.year }}">
+        </div>
+
+        <div class="form-group">
+            <label for="pages">Страницы</label>
+            <input type="text" class="form-control" id="pages" name="pages"
+                   value="{{ thesis.pages }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a href="{{ url_for('publications.theses_list') }}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
+<!--</body>-->
+<!--</html>-->

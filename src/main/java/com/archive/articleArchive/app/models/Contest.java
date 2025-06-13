@@ -12,6 +12,15 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("CONTEST")
 public class Contest extends ScientificEvent {
+
+    public void setContestType(ContestType contestType) {
+        this.contestType = contestType;
+    }
+
+    public ContestType getContestType() {
+        return contestType;
+    }
+
     public enum ContestType { INTERNATIONAL, RKNR, VAKR, UNIVERSITY }
     
     @Enumerated(EnumType.STRING)

@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
+//@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "publication_type")
@@ -29,6 +29,38 @@ public abstract class Publication {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setOutputData(String outputData) {
+        this.outputData = outputData;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getOutputData() {
+        return outputData;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
 }
 //В полях ввода должны быть ФИО, курс, группа, факультет курсанта/студента,
 //ФИО научного руководителя,

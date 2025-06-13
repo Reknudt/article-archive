@@ -1,0 +1,51 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Список студентов</title>-->
+<!--</head>-->
+<!--<body>-->
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Редактирование статьи</h2>
+
+    <form method="POST" action="{{ url_for('publications.edit_article', article_id=article.id) }}">
+        <div class="form-group">
+            <label for="title">Название статьи</label>
+            <input type="text" class="form-control" id="title" name="title"
+                   value="{{ article.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="authors">Авторы</label>
+            <input type="text" class="form-control" id="authors" name="authors"
+                   value="{{ article.authors }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="journal">Журнал</label>
+            <input type="text" class="form-control" id="journal" name="journal"
+                   value="{{ article.journal }}">
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год публикации</label>
+            <input type="number" class="form-control" id="year" name="year"
+                   value="{{ article.year }}">
+        </div>
+
+        <div class="form-group">
+            <label for="doi">DOI</label>
+            <input type="text" class="form-control" id="doi" name="doi"
+                   value="{{ article.doi }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a href="{{ url_for('publications.articles_list') }}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
+<!--</body>-->
+<!--</html>-->

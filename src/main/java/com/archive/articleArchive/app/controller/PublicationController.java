@@ -1,5 +1,6 @@
-package com.archive.articleArchive.app;
+package com.archive.articleArchive.app.controller;
 
+import com.archive.articleArchive.app.models.ResourceNotFoundException;
 import com.archive.articleArchive.app.models.Article;
 import com.archive.articleArchive.app.models.Publication;
 import com.archive.articleArchive.app.models.PublicationType;

@@ -1,5 +1,6 @@
-package com.archive.articleArchive.app;
+package com.archive.articleArchive.app.controller;
 
+import com.archive.articleArchive.app.models.ResourceNotFoundException;
 import com.archive.articleArchive.app.models.Article;
 import com.archive.articleArchive.app.models.Conference;
 import com.archive.articleArchive.app.models.Contest;
@@ -89,6 +90,14 @@ public class StudentController {
         model.addAttribute("newThesis", new Thesis());
 
         return "students/view";
+    }
+
+    @GetMapping("/students/edit/{id}")
+    public String editStudentForm(@PathVariable Long id, Model model) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        model.addAttribute("student", student);
+        return "students/edit"; // Убедитесь, что у вас есть этот шаблон
     }
 
     // 3. Добавление нового студента
@@ -262,10 +271,10 @@ public class StudentController {
     // 12. Удаление студента
     @PostMapping("/{id}/delete")
     public String deleteStudent(@PathVariable Long id) {
-        Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
-
-        studentRepository.delete(student);
+//        Student student = studentRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+//        studentRepository.delete(student);
+        studentRepository.deleteById(id);
         return "redirect:/students";
     }
 

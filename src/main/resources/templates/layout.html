@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Article Archive</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Ваши кастомные стили -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container my-4">
+    <div th:replace="~{${content}}"></div>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Подключение JS в конце body -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
